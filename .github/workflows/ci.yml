@@ -1,4 +1,4 @@
-name: analytical-validation
+name: pricing-validation
 on: [push, pull_request]
 permissions:
   contents: read
@@ -16,3 +16,4 @@ jobs:
       - run: ruff format --check .
       - run: pytest -v
       - run: python examples/analytical_pricing.py
+      - run: python examples/monte_carlo_pricing.py

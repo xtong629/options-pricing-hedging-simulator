@@ -1,8 +1,9 @@
 # Options Pricing, Risk & Hedging Analytics Platform
 
-A reproducible European equity option research project. Phase 1 provides scalar
+A reproducible European equity option research project. The analytical foundation provides scalar
 Black-Scholes-Merton call/put prices, analytical Delta, Gamma, Vega, Theta and Rho,
-and independent deterministic numerical validation.
+and independent deterministic numerical validation. Phase 2 adds batched
+risk-neutral Monte Carlo valuation and antithetic variance reduction.
 
 ## Installation
 
@@ -74,13 +75,55 @@ numerical reference for the documented test grid.
 
 ## Implemented scope and limitations
 
-The public API accepts scalar inputs. Extremely large discounted values or
+Contract inputs are scalar; terminal sampling uses NumPy arrays. Extremely large discounted values or
 sensitivities outside floating-point range raise ValueError; tiny tail values
 can underflow. Boundary sensitivities use a conservative missing-value policy.
 The model assumes constant rates, yield and volatility, continuous frictionless
-pricing, and European exercise. Monte Carlo, dynamic hedging and risk research
+pricing, and European exercise. Dynamic hedging and risk research
 are scheduled in [the roadmap](docs/MASTER_PLAN.md).
 
 Actual validation records are tracked in
 [the evidence ledger](docs/RESUME_EVIDENCE.md). No performance benchmark has been
 established.
+
+## Monte Carlo valuation (Phase 2)
+
+```python
+from optionlab import MonteCarloConfig, mc_price
+
+result = mc_price(option, market, MonteCarloConfig(
+    n_paths=100_000, method="antithetic", seed=20261122, batch_size=4096
+))
+print(result)
+```
+
+Run the comparison example with
+`python examples/monte_carlo_pricing.py`. Reproduce the multi-seed study with
+`python -m optionlab.experiments --repeats 100 --full-grid --output /tmp/mc-study.json`.
+The full study uses 100 independent seeds per method, option type and path budget,
+plus a 24-configuration analytical comparison with both sampling methods.
+
+Terminal GBM sampling uses Q drift r-q and discounts each payoff by exp(-rτ).
+Standard sampling uses N independent payoffs. Antithetic sampling uses Z and -Z,
+averages the two discounted payoffs, and estimates sample variance with ddof=1
+over N/2 independent pair means. Both methods report sample standard deviation,
+SE=s/sqrt(n), and the asymptotic 95% interval estimate ±1.96 SE.
+
+At least two independent observations are required. Antithetic path counts must
+be even. Batch size counts independent observations, with O(batch_size) working
+memory. Merged centered moments avoid retaining paths; changing batch size can
+change reduction rounding. Both methods use equal path budgets in the study,
+although antithetic sampling needs half as many normal draws.
+
+The default local Generator uses PCG64. A supplied NumPy Generator requires
+config.seed=None, advances in place, and its initial serialized bit-generator
+state is recorded in the result. Reproducibility requires the same NumPy version,
+bit generator, state/seed and settings. Global random state is untouched.
+Zero tenor/volatility returns the exact boundary price and zero uncertainty,
+consumes no random draws, and retains the requested budget in result metadata.
+
+Rare-payoff samples can contain only zeros, making an empirical interval
+uninformative. Normal intervals have approximate repeated-sampling coverage and
+can miss the analytical price. The study reports measured coverage with its
+sampling SE and empirical log-RMSE slope across path budgets. Tiny values may
+underflow, and nonrepresentable simulation values or moments raise ValueError.
