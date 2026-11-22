@@ -1,6 +1,7 @@
 """Empirical contract-currency losses and path-paired sampling uncertainty."""
 
 from collections.abc import Mapping
+from fractions import Fraction
 from math import ceil, floor
 
 import numpy as np
@@ -25,8 +26,9 @@ def tail_risk(losses: ArrayLike, alpha: float = 0.95) -> dict:
     if not 0 < alpha < 1:
         raise ValueError("alpha must lie strictly between zero and one")
     ordered = np.sort(_sample(losses))
-    rank = ceil(len(ordered) * alpha)
-    mass = len(ordered) * (1 - alpha)
+    probability = Fraction(str(alpha))
+    rank = ceil(len(ordered) * probability)
+    mass = float(len(ordered) * (1 - probability))
     whole = floor(mass)
     tail_sum = ordered[len(ordered) - whole :].sum()
     if whole < len(ordered):

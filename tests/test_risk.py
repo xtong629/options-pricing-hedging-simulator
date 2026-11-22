@@ -50,3 +50,7 @@ def test_pairing_and_sign():
     with pytest.raises(ValueError):
         paired_bootstrap(d, {1: 2}, seed=1)
     assert summarize([1, -5])["worst_observed"] == 5
+
+
+def test_decimal_rank_on_grid_boundary():
+    assert tail_risk(range(1, 101), 0.14)["var"] == 14
