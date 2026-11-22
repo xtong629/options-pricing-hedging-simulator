@@ -145,3 +145,7 @@ trades and cash flows. Run `python examples/hedging_research.py` to reproduce
 the research and terminal arrays. See the
 [hedging validation report](docs/HEDGING_VALIDATION_REPORT.md) for results,
 model assumptions and limitations.
+
+## Risk analytics
+
+Run `python examples/risk_research.py risk.json` to regenerate contract-level tail losses, paired daily-minus-weekly intervals, a ledger-based Greek explain and static shock revaluations. See the [validation report](docs/RISK_VALIDATION_REPORT.md).

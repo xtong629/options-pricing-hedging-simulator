@@ -1,13 +1,13 @@
 # 公开证据台账
 
-当前成果为 Phase 0 的业务、架构、验收与开发设计。此阶段可以描述已设计空头欧式看涨期权的自融资账本和独立验证方案。Phase 1 已实现解析定价及敏感度，验证记录见下方。Phase 2 已实现终值模拟及估值，结果见下方。后续对冲效果与发布记录待对应阶段验证。规划输入不能作为运行结果。
+当前成果为 Phase 0 的业务、架构、验收与开发设计。此阶段可以描述已设计空头欧式看涨期权的自融资账本和独立验证方案。Phase 1 已实现解析定价及敏感度，验证记录见下方。Phase 2 已实现终值模拟及估值，结果见下方。Phase 3 已合并并提供对冲账本，Phase 4 已完成分支本地验证。规划输入不能作为运行结果。
 
 |待验证能力|预期代码与测试定位（拟建）|需附的公开证据|状态|
 |---|---|---|---|
 |解析定价和敏感度|src/optionlab/pricing.py、greeks.py；tests/test_analytical.py|下方 Phase 1 记录及可重跑示例|已实现，本地验证通过|
 |随机估值|src/optionlab/simulation.py；tests/test_monte_carlo.py|[Phase 2 验证记录](MC_VALIDATION_REPORT.md)，含实际路径数、独立样本数、SE 与覆盖率|已实现，本地验证通过|
-|自融资复制与基础比较（阶段 3）|portfolio、hedging；同点及跨期权益对账、股息网格收敛|可重放账本、结算差额、日/周 P&L 与误差及成本比较；q=0 主基准，q>0 收敛误差表|待实施|
-|高级风险分析（阶段 4）|risk、pnl；手算尾损与归因测试|VaR/ES、详细近似归因、成本敏感度与配对 Bootstrap 区间|待实施|
+|自融资复制与基础比较（阶段 3）|portfolio、hedging；同点及跨期权益对账、股息网格收敛|可重放账本、结算差额、日/周 P&L 与误差及成本比较；q=0 主基准，q>0 收敛误差表|已合并|
+|高级风险分析（阶段 4）|risk、pnl；手算尾损与归因测试|[VaR/ES、归因与配对区间](RISK_VALIDATION_REPORT.md)|分支已实现|
 |可复现交付|experiments、reporting、CLI 与 CI|运行记录、安装验证、性能基准及 release 链接|待实施|
 
 每条实绩记录填写：能力描述、合并 SHA/PR、模块和测试永久链接、命令、配置与种子、实际规模、硬件与版本、误差/耗时及单位、结果文件、CI 日志、限制和审核日期。简历表述只能从审核后的记录提取，并限定模型、样本和比较基准。当前不能声称实盘执行、银行业绩、性能提升或策略收益。
@@ -55,3 +55,7 @@ Ruff 0.17.6 创建独立虚拟环境并执行非 editable 安装。
 [对冲验证报告](HEDGING_VALIDATION_REPORT.md)记录逐笔账本、手算验证、
 同路径日周比较、股息收敛、实验配置、源提交和单次资源观察。
 实验终端数组由报告所列命令生成，远端 CI 和 PR 状态须单独核实。
+
+## 合并记录与 Phase 4 证据
+
+main 第一父链确认 Phase 1 PR #2（ed7fd76）、Phase 2 PR #3（c987a3e）、Phase 3 PR #4（bee9f8f）均已合并。此前各阶段本地运行记录保留。Phase 4 实现位于 src/optionlab/risk.py 与 pnl.py，测试位于 tests/test_risk.py 与 test_pnl.py，实测结果见[风险验证报告](RISK_VALIDATION_REPORT.md)。
