@@ -49,3 +49,9 @@ Ruff 0.17.6 创建独立虚拟环境并执行非 editable 安装。
 报告包含实现源提交、环境、种子配置、误差、覆盖、收敛和资源观察。
 本阶段公开 API 为 MonteCarloConfig、MonteCarloResult、gbm_terminal 和 mc_price。
 远端 PR、CI 及合并状态须按实际 GitHub 结果核实。
+
+## Phase 3 实测记录
+
+[对冲验证报告](HEDGING_VALIDATION_REPORT.md)记录逐笔账本、手算验证、
+同路径日周比较、股息收敛、实验配置、源提交和单次资源观察。
+实验终端数组由报告所列命令生成，远端 CI 和 PR 状态须单独核实。
