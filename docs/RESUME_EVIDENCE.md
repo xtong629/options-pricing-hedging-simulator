@@ -1,11 +1,11 @@
 # 公开证据台账
 
-当前成果为 Phase 0 的业务、架构、验收与开发设计。此阶段可以描述已设计空头欧式看涨期权的自融资账本和独立验证方案。Phase 1 已实现解析定价及敏感度，验证记录见下方。后续模拟、性能、对冲效果与发布记录待对应阶段验证。规划输入不能作为运行结果。
+当前成果为 Phase 0 的业务、架构、验收与开发设计。此阶段可以描述已设计空头欧式看涨期权的自融资账本和独立验证方案。Phase 1 已实现解析定价及敏感度，验证记录见下方。Phase 2 已实现终值模拟及估值，结果见下方。后续对冲效果与发布记录待对应阶段验证。规划输入不能作为运行结果。
 
 |待验证能力|预期代码与测试定位（拟建）|需附的公开证据|状态|
 |---|---|---|---|
 |解析定价和敏感度|src/optionlab/pricing.py、greeks.py；tests/test_analytical.py|下方 Phase 1 记录及可重跑示例|已实现，本地验证通过|
-|随机估值|simulation；对偶对和种子回归|收敛图，实际路径数、独立样本数、SE 与覆盖率|待实施|
+|随机估值|src/optionlab/simulation.py；tests/test_monte_carlo.py|[Phase 2 验证记录](MC_VALIDATION_REPORT.md)，含实际路径数、独立样本数、SE 与覆盖率|已实现，本地验证通过|
 |自融资复制与基础比较（阶段 3）|portfolio、hedging；同点及跨期权益对账、股息网格收敛|可重放账本、结算差额、日/周 P&L 与误差及成本比较；q=0 主基准，q>0 收敛误差表|待实施|
 |高级风险分析（阶段 4）|risk、pnl；手算尾损与归因测试|VaR/ES、详细近似归因、成本敏感度与配对 Bootstrap 区间|待实施|
 |可复现交付|experiments、reporting、CLI 与 CI|运行记录、安装验证、性能基准及 release 链接|待实施|
@@ -42,3 +42,10 @@ Rho 1.2127424753316518e−7。单位采用架构约定，所有样例满足既�
 Ruff 0.17.6 创建独立虚拟环境并执行非 editable 安装。
 同一组 298 项测试全部通过，0 failed、0 skipped，Ruff 两项检查和正式示例通过。
 此记录验证当前环境的 Python 3.11 安装路径，远端 Actions 状态另行核实。
+
+## Phase 2 实测记录
+
+详见 [Monte Carlo 研究报告](MC_VALIDATION_REPORT.md)及其原始 JSON 汇总。
+报告包含实现源提交、环境、种子配置、误差、覆盖、收敛和资源观察。
+本阶段公开 API 为 MonteCarloConfig、MonteCarloResult、gbm_terminal 和 mc_price。
+远端 PR、CI 及合并状态须按实际 GitHub 结果核实。

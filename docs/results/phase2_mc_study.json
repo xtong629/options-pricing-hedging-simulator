@@ -1,0 +1,1879 @@
+{
+  "metadata": {
+    "source_commit": "4d2d11c2c07d5fee632ec3f5a15af6fd78eaff80",
+    "working_tree_dirty": false,
+    "python": "3.12.14",
+    "numpy": "2.5.5",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "rng": "PCG64",
+    "root_seed": 20261122,
+    "batch_size_observations": 4096,
+    "repeats": 100,
+    "elapsed_seconds": 0.8832552000003489,
+    "process_peak_rss_mib": 52.83203125,
+    "reproduction": "python -m optionlab.experiments --repeats 100 --full-grid --output /tmp/mc-study.json"
+  },
+  "example": [
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 100
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.2,
+        "time": 0.0
+      },
+      "analytical_price": 8.82732122535214,
+      "result": {
+        "estimate": 8.853010278740353,
+        "sample_std": 13.706397772526458,
+        "standard_error": 0.04334343547744205,
+        "confidence_interval": [
+          8.768057145204567,
+          8.937963412276138
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 20261122,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 227545092632529702032305629452684732711, \"state\": 281776022383248833235790369681545423085}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.025689053388212812
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 100
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.2,
+        "time": 0.0
+      },
+      "analytical_price": 8.82732122535214,
+      "result": {
+        "estimate": 8.84289330587496,
+        "sample_std": 7.369862428937205,
+        "standard_error": 0.03295902675185061,
+        "confidence_interval": [
+          8.778293613441331,
+          8.907492998308587
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 20261122,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 227545092632529702032305629452684732711, \"state\": 281776022383248833235790369681545423085}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.01557208052281922
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 100
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.2,
+        "time": 0.0
+      },
+      "analytical_price": 6.866891205286106,
+      "result": {
+        "estimate": 6.897178759120948,
+        "sample_std": 9.646017296646315,
+        "standard_error": 0.030503385006782423,
+        "confidence_interval": [
+          6.837392124507654,
+          6.956965393734241
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 20261122,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 227545092632529702032305629452684732711, \"state\": 281776022383248833235790369681545423085}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.030287553834841496
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 100
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.2,
+        "time": 0.0
+      },
+      "analytical_price": 6.866891205286106,
+      "result": {
+        "estimate": 6.877023824651582,
+        "sample_std": 4.753903005668808,
+        "standard_error": 0.021260100558232044,
+        "confidence_interval": [
+          6.835354027557448,
+          6.9186936217457164
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 20261122,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 227545092632529702032305629452684732711, \"state\": 281776022383248833235790369681545423085}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.010132619365475826
+    }
+  ],
+  "convergence": [
+    {
+      "kind": "call",
+      "method": "standard",
+      "n_paths": 1000,
+      "n_observations": 1000,
+      "repeats": 100,
+      "rmse": 0.48654204028131187,
+      "mean_absolute_error": 0.3876027513156544,
+      "mean_standard_error": 0.4289423058494995,
+      "mean_squared_standard_error": 0.18438683088072383,
+      "coverage": 0.91,
+      "coverage_sampling_se": 0.028618176042508364,
+      "empirical_log_rmse_slope": -0.5326430759279138,
+      "empirical_mse_ratio_to_standard": 1.0,
+      "estimated_variance_ratio_to_standard": 1.0
+    },
+    {
+      "kind": "call",
+      "method": "standard",
+      "n_paths": 10000,
+      "n_observations": 10000,
+      "repeats": 100,
+      "rmse": 0.12890879364864316,
+      "mean_absolute_error": 0.10768590599530235,
+      "mean_standard_error": 0.13631024720325735,
+      "mean_squared_standard_error": 0.01858335543832624,
+      "coverage": 0.97,
+      "coverage_sampling_se": 0.017058722109231986,
+      "empirical_log_rmse_slope": -0.5326430759279138,
+      "empirical_mse_ratio_to_standard": 1.0,
+      "estimated_variance_ratio_to_standard": 1.0
+    },
+    {
+      "kind": "call",
+      "method": "standard",
+      "n_paths": 100000,
+      "n_observations": 100000,
+      "repeats": 100,
+      "rmse": 0.04186337328051254,
+      "mean_absolute_error": 0.034229065466458264,
+      "mean_standard_error": 0.04320722942362577,
+      "mean_squared_standard_error": 0.0018668925084134728,
+      "coverage": 0.95,
+      "coverage_sampling_se": 0.021794494717703377,
+      "empirical_log_rmse_slope": -0.5326430759279138,
+      "empirical_mse_ratio_to_standard": 1.0,
+      "estimated_variance_ratio_to_standard": 1.0
+    },
+    {
+      "kind": "call",
+      "method": "antithetic",
+      "n_paths": 1000,
+      "n_observations": 500,
+      "repeats": 100,
+      "rmse": 0.31780432260304164,
+      "mean_absolute_error": 0.2600771570167801,
+      "mean_standard_error": 0.3306902494153113,
+      "mean_squared_standard_error": 0.10965022370465427,
+      "coverage": 0.99,
+      "coverage_sampling_se": 0.009949874371066205,
+      "empirical_log_rmse_slope": -0.5132845381739369,
+      "empirical_mse_ratio_to_standard": 0.4266569809297296,
+      "estimated_variance_ratio_to_standard": 0.5946749189240355
+    },
+    {
+      "kind": "call",
+      "method": "antithetic",
+      "n_paths": 10000,
+      "n_observations": 5000,
+      "repeats": 100,
+      "rmse": 0.11020245667479332,
+      "mean_absolute_error": 0.0890040890947097,
+      "mean_standard_error": 0.10422070884035267,
+      "mean_squared_standard_error": 0.010864451112865,
+      "coverage": 0.92,
+      "coverage_sampling_se": 0.027129319932501065,
+      "empirical_log_rmse_slope": -0.5132845381739369,
+      "empirical_mse_ratio_to_standard": 0.7308318464187322,
+      "estimated_variance_ratio_to_standard": 0.5846334451774085
+    },
+    {
+      "kind": "call",
+      "method": "antithetic",
+      "n_paths": 100000,
+      "n_observations": 50000,
+      "repeats": 100,
+      "rmse": 0.029894460734811862,
+      "mean_absolute_error": 0.024136082021150907,
+      "mean_standard_error": 0.032950303280531966,
+      "mean_squared_standard_error": 0.0010857426828463279,
+      "coverage": 0.95,
+      "coverage_sampling_se": 0.021794494717703377,
+      "empirical_log_rmse_slope": -0.5132845381739369,
+      "empirical_mse_ratio_to_standard": 0.5099328696206497,
+      "estimated_variance_ratio_to_standard": 0.5815775026967227
+    },
+    {
+      "kind": "put",
+      "method": "standard",
+      "n_paths": 1000,
+      "n_observations": 1000,
+      "repeats": 100,
+      "rmse": 0.30713963631396973,
+      "mean_absolute_error": 0.2428916175370878,
+      "mean_standard_error": 0.30193183398021073,
+      "mean_squared_standard_error": 0.09124002400373017,
+      "coverage": 0.95,
+      "coverage_sampling_se": 0.021794494717703377,
+      "empirical_log_rmse_slope": -0.505753328091641,
+      "empirical_mse_ratio_to_standard": 1.0,
+      "estimated_variance_ratio_to_standard": 1.0
+    },
+    {
+      "kind": "put",
+      "method": "standard",
+      "n_paths": 10000,
+      "n_observations": 10000,
+      "repeats": 100,
+      "rmse": 0.09618577620270499,
+      "mean_absolute_error": 0.08029990080095872,
+      "mean_standard_error": 0.09602659482149449,
+      "mean_squared_standard_error": 0.00922176590381898,
+      "coverage": 0.97,
+      "coverage_sampling_se": 0.017058722109231986,
+      "empirical_log_rmse_slope": -0.505753328091641,
+      "empirical_mse_ratio_to_standard": 1.0,
+      "estimated_variance_ratio_to_standard": 1.0
+    },
+    {
+      "kind": "put",
+      "method": "standard",
+      "n_paths": 100000,
+      "n_observations": 100000,
+      "repeats": 100,
+      "rmse": 0.029910881309878873,
+      "mean_absolute_error": 0.022791266355641458,
+      "mean_standard_error": 0.030360940821638788,
+      "mean_squared_standard_error": 0.0009217933901644501,
+      "coverage": 0.94,
+      "coverage_sampling_se": 0.023748684174075843,
+      "empirical_log_rmse_slope": -0.505753328091641,
+      "empirical_mse_ratio_to_standard": 1.0,
+      "estimated_variance_ratio_to_standard": 1.0
+    },
+    {
+      "kind": "put",
+      "method": "antithetic",
+      "n_paths": 1000,
+      "n_observations": 500,
+      "repeats": 100,
+      "rmse": 0.22106465527841693,
+      "mean_absolute_error": 0.18600934619777224,
+      "mean_standard_error": 0.2118317384918919,
+      "mean_squared_standard_error": 0.04492002505027303,
+      "coverage": 0.96,
+      "coverage_sampling_se": 0.019595917942265433,
+      "empirical_log_rmse_slope": -0.5196237112153754,
+      "empirical_mse_ratio_to_standard": 0.5180442901904201,
+      "estimated_variance_ratio_to_standard": 0.4923280713783741
+    },
+    {
+      "kind": "put",
+      "method": "antithetic",
+      "n_paths": 10000,
+      "n_observations": 5000,
+      "repeats": 100,
+      "rmse": 0.06542218299847714,
+      "mean_absolute_error": 0.05166787200364568,
+      "mean_standard_error": 0.06720426560692715,
+      "mean_squared_standard_error": 0.004516852951130962,
+      "coverage": 0.96,
+      "coverage_sampling_se": 0.019595917942265433,
+      "empirical_log_rmse_slope": -0.5196237112153754,
+      "empirical_mse_ratio_to_standard": 0.462624208402459,
+      "estimated_variance_ratio_to_standard": 0.4898034712918068
+    },
+    {
+      "kind": "put",
+      "method": "antithetic",
+      "n_paths": 100000,
+      "n_observations": 50000,
+      "repeats": 100,
+      "rmse": 0.020196303522587524,
+      "mean_absolute_error": 0.01591592198680855,
+      "mean_standard_error": 0.021222280142951987,
+      "mean_squared_standard_error": 0.00045038951795095035,
+      "coverage": 0.96,
+      "coverage_sampling_se": 0.019595917942265433,
+      "empirical_log_rmse_slope": -0.5196237112153754,
+      "empirical_mse_ratio_to_standard": 0.4559165513048765,
+      "estimated_variance_ratio_to_standard": 0.4886013750549891
+    }
+  ],
+  "grid": [
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 10.644027561180527,
+      "result": {
+        "estimate": 10.694407372686042,
+        "sample_std": 7.087353501112923,
+        "standard_error": 0.022412179646285543,
+        "confidence_interval": [
+          10.650479500579323,
+          10.738335244792761
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 14766666391133928982,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 122386503647434366019833009926912380649, \"state\": 325591406972927008290918825844805456122}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.05037981150551474
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 10.644027561180527,
+      "result": {
+        "estimate": 10.636953466539056,
+        "sample_std": 1.0777019783200492,
+        "standard_error": 0.0048196297660192695,
+        "confidence_interval": [
+          10.62750699219766,
+          10.646399940880453
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 554681570295089340,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 161055920544333188932290788877732651757, \"state\": 20761238647199796427638499953259281729}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.007074094641470907
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 12.323149027915244,
+      "result": {
+        "estimate": 12.404717907842548,
+        "sample_std": 12.686137309626464,
+        "standard_error": 0.04011708860806035,
+        "confidence_interval": [
+          12.32608841417075,
+          12.483347401514346
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 16804364306148274208,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 157508761097456161930677845859409348559, \"state\": 165151856095544199322333584559382657124}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.08156887992730333
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 12.323149027915244,
+      "result": {
+        "estimate": 12.314911191518876,
+        "sample_std": 4.31448398435963,
+        "standard_error": 0.019294958953724545,
+        "confidence_interval": [
+          12.277093071969576,
+          12.352729311068176
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 3617618425912062354,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 116077891355638989054735035019117354467, \"state\": 206952504146706999744131623267626430143}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.008237836396368436
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 13.235897784849183,
+      "result": {
+        "estimate": 13.225874229922029,
+        "sample_std": 12.83685824589675,
+        "standard_error": 0.040593710057747534,
+        "confidence_interval": [
+          13.146310558208844,
+          13.305437901635214
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 4024851223194962659,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 202300509048080369814594683258218487227, \"state\": 141213643880505786979913497200720808235}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.010023554927153455
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 13.235897784849183,
+      "result": {
+        "estimate": 13.221372137573162,
+        "sample_std": 4.053557779577365,
+        "standard_error": 0.018128061491716193,
+        "confidence_interval": [
+          13.1858411370494,
+          13.256903138096925
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 15446816897544136276,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 264246465154324155558423999595784747501, \"state\": 237675021128795966670219415525501066902}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.014525647276020237
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 17.88927208398809,
+      "result": {
+        "estimate": 17.902980061318647,
+        "sample_std": 24.41421049056085,
+        "standard_error": 0.07720451242494906,
+        "confidence_interval": [
+          17.75165921696575,
+          18.054300905671546
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 17620713657177289027,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 146381398211580983271098100702867972865, \"state\": 193729036265566650189187756766423514133}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.013707977330557952
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 17.88927208398809,
+      "result": {
+        "estimate": 17.867111569642375,
+        "sample_std": 11.908966706116423,
+        "standard_error": 0.053258518193316166,
+        "confidence_interval": [
+          17.762724873983476,
+          17.971498265301275
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 15453041068392955311,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 252853853376216134562164223033624307519, \"state\": 316586341381343400263821561782268449431}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.022160514345713977
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 3.231817946971942,
+      "result": {
+        "estimate": 3.242916578098735,
+        "sample_std": 4.715607461231786,
+        "standard_error": 0.014912060128776604,
+        "confidence_interval": [
+          3.2136889402463327,
+          3.272144215951137
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 16825758557192320972,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 304477443797232616012476911582087098677, \"state\": 159231323164693520125864268473901995838}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.011098631126792657
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 3.231817946971942,
+      "result": {
+        "estimate": 3.2541186068493912,
+        "sample_std": 2.453694930590516,
+        "standard_error": 0.010973257321694043,
+        "confidence_interval": [
+          3.232611022498871,
+          3.2756261911999114
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 7999335086868759494,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 334129104790120584380058271182563901413, \"state\": 128153890285210390510662781885332902281}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.022300659877449114
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 6.200781086098768,
+      "result": {
+        "estimate": 6.206239284446433,
+        "sample_std": 9.709475724802145,
+        "standard_error": 0.030704058176489003,
+        "confidence_interval": [
+          6.146059330420514,
+          6.266419238472351
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 16213708002491286660,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 311915232040454479273093133552383414753, \"state\": 39393057963075127347072867498643506278}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.005458198347664478
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 6.200781086098768,
+      "result": {
+        "estimate": 6.207998972919687,
+        "sample_std": 5.30641913853316,
+        "standard_error": 0.02373102782173204,
+        "confidence_interval": [
+          6.161486158389092,
+          6.254511787450282
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 6963132632631958315,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 34398695521037765785903519611188197947, \"state\": 246706076859030546049955326442353714207}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.007217886820918729
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 6.8925701627789175,
+      "result": {
+        "estimate": 6.89317887319084,
+        "sample_std": 10.14230563477959,
+        "standard_error": 0.032072786531463365,
+        "confidence_interval": [
+          6.830316211589172,
+          6.956041534792509
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 4247983430055909243,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 195111034358018881667873859570255043287, \"state\": 265479496544744177884624474726147466917}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.000608710411922786
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 6.8925701627789175,
+      "result": {
+        "estimate": 6.944579058766341,
+        "sample_std": 5.264657777807613,
+        "standard_error": 0.023544265338901613,
+        "confidence_interval": [
+          6.898432298702094,
+          6.9907258188305885
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 1474366283225745944,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 165578189151680884970939781697888520781, \"state\": 229401388510444619740944847577578314808}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.05200889598742364
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 12.694004526235585,
+      "result": {
+        "estimate": 12.601132906143745,
+        "sample_std": 21.340386501360726,
+        "standard_error": 0.06748422749261186,
+        "confidence_interval": [
+          12.468863820258225,
+          12.733401992029265
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 5246165612993297384,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 171624663720436733413260545979513465705, \"state\": 268901809117089401409400229299149598386}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.0928716200918398
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 12.694004526235585,
+      "result": {
+        "estimate": 12.678202993537937,
+        "sample_std": 12.300723151917039,
+        "standard_error": 0.05501050628018394,
+        "confidence_interval": [
+          12.570382401228777,
+          12.786023585847097
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 15712797453696307985,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 65489842870009981196242029071846838895, \"state\": 57257060645306221705231576523286357861}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.015801532697647502
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 0.4351863500701317,
+      "result": {
+        "estimate": 0.4325836555515933,
+        "sample_std": 1.721759756077081,
+        "standard_error": 0.0054446824128195105,
+        "confidence_interval": [
+          0.42191207802246705,
+          0.4432552330807195
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 12772004304498672163,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 197361260660694142059554012575959198655, \"state\": 265655348495373388280151436435677102305}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.0026026945185383954
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 0.4351863500701317,
+      "result": {
+        "estimate": 0.43756984858665066,
+        "sample_std": 1.1849425534739635,
+        "standard_error": 0.005299224197999924,
+        "confidence_interval": [
+          0.4271833691585708,
+          0.4479563280147305
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 1444088794578503060,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 51899908797609087058300696747770525959, \"state\": 114917058993285223763290781613471637877}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.002383498516518978
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 2.6274945452310385,
+      "result": {
+        "estimate": 2.6389295503593515,
+        "sample_std": 6.487463255380936,
+        "standard_error": 0.020515160123654362,
+        "confidence_interval": [
+          2.598719836516989,
+          2.679139264201714
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 5231701315215196379,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 83723235059913122636046561226458373527, \"state\": 255590969572380369726385943937091665016}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.01143500512831297
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 2.6274945452310385,
+      "result": {
+        "estimate": 2.6503052207929807,
+        "sample_std": 4.223171824437342,
+        "standard_error": 0.01888659856020741,
+        "confidence_interval": [
+          2.6132874876149743,
+          2.687322953970987
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 5544136669805795842,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 54090141967031889042649740428241497785, \"state\": 192987916478662895070271014240382595312}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.022810675561942162
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 3.035955698191281,
+      "result": {
+        "estimate": 2.9842405007904524,
+        "sample_std": 6.903160261118625,
+        "standard_error": 0.021829709478297543,
+        "confidence_interval": [
+          2.941454270212989,
+          3.027026731367916
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 8875799382898903827,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 60054152026517017937075921796988564449, \"state\": 6070127187541724622111492476862208185}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.05171519740082875
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 3.035955698191281,
+      "result": {
+        "estimate": 3.0305596902583476,
+        "sample_std": 4.4013180859621395,
+        "standard_error": 0.019683292861621213,
+        "confidence_interval": [
+          2.99198043624957,
+          3.069138944267125
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 1235561906220022505,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 253401850754876238425893907136764703171, \"state\": 89672313773076833265894106901330217067}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.0053960079329336
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 8.775956122979755,
+      "result": {
+        "estimate": 8.732383318389807,
+        "sample_std": 18.392920385264954,
+        "standard_error": 0.05816352123957894,
+        "confidence_interval": [
+          8.618382816760233,
+          8.846383820019382
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 5865226786939995967,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 326625406513873997519828655676755026629, \"state\": 195637772155887074767311862602803418578}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.04357280458994772
+    },
+    {
+      "option": {
+        "option_type": "call",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 8.775956122979755,
+      "result": {
+        "estimate": 8.805667429848299,
+        "sample_std": 11.350389937708826,
+        "standard_error": 0.050760486943693076,
+        "confidence_interval": [
+          8.706176875438661,
+          8.905157984257936
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 13411613749913288170,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 196474685367410303730126199110327311269, \"state\": 126724570126278917054536279235736784519}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.02971130686854373
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 0.22124025515693915,
+      "result": {
+        "estimate": 0.22647834539313905,
+        "sample_std": 1.047220089807121,
+        "standard_error": 0.003311600695276582,
+        "confidence_interval": [
+          0.21998760803039694,
+          0.23296908275588116
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 3030081611384261417,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 79458825396493294160558589592492429899, \"state\": 294280176328446367332588302677366206751}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.005238090236199894
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 0.22124025515693915,
+      "result": {
+        "estimate": 0.21538583579665416,
+        "sample_std": 0.7051905785204262,
+        "standard_error": 0.003153708141328152,
+        "confidence_interval": [
+          0.20920456783965097,
+          0.22156710375365735
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 9769889629538926814,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 303251920247066071659815826922996605057, \"state\": 273950066790914602999702332889735432096}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.005854419360284996
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 1.9003617218916553,
+      "result": {
+        "estimate": 1.901436671489831,
+        "sample_std": 4.375607542389225,
+        "standard_error": 0.01383688598096171,
+        "confidence_interval": [
+          1.874316374967146,
+          1.9285569680125159
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 12235450916335081670,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 253885170572356711601054802802993167503, \"state\": 328567336284030535959275895030470911896}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.0010749495981756674
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 1.9003617218916553,
+      "result": {
+        "estimate": 1.9145464296514836,
+        "sample_std": 2.80434975602871,
+        "standard_error": 0.012541433374330294,
+        "confidence_interval": [
+          1.8899652202377961,
+          1.939127639065171
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 162039547438946045,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 90648594534237008220135100215397434069, \"state\": 125752304535814128783375846233410277483}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.014184707759828274
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 1.5710124292980223,
+      "result": {
+        "estimate": 1.5789116984818878,
+        "sample_std": 3.9476489541268713,
+        "standard_error": 0.01248356209782247,
+        "confidence_interval": [
+          1.5544439167701558,
+          1.6033794801936199
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 13295588812852479090,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 120570156631706550919189262896004584297, \"state\": 99732282592604532986229689657696630668}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.00789926918386552
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 1.5710124292980223,
+      "result": {
+        "estimate": 1.5886198369363569,
+        "sample_std": 2.5597010416474792,
+        "standard_error": 0.011447331062401568,
+        "confidence_interval": [
+          1.5661830680540498,
+          1.611056605818664
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 14507551056991507416,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 242012233926956178536715277281131107275, \"state\": 92234828708678664122254526369387010762}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.01760740763833457
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 6.22438672843693,
+      "result": {
+        "estimate": 6.259080195553041,
+        "sample_std": 10.398708495716544,
+        "standard_error": 0.03288360357060756,
+        "confidence_interval": [
+          6.19462833255465,
+          6.323532058551432
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 4083618348982621652,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 19562773913794638619929589705151197463, \"state\": 125766334087490838025836879273414219410}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.03469346711611099
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 90,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 6.22438672843693,
+      "result": {
+        "estimate": 6.226744665550363,
+        "sample_std": 5.82417867906257,
+        "standard_error": 0.026046518878977673,
+        "confidence_interval": [
+          6.175693488547567,
+          6.27779584255316
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 13277870918359264532,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 155976566720204798076072455010704002525, \"state\": 130628831832229658430485986976661891565}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.0023579371134330174
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 2.7343111891397833,
+      "result": {
+        "estimate": 2.7588229907827806,
+        "sample_std": 4.045083770662897,
+        "standard_error": 0.01279167804147695,
+        "confidence_interval": [
+          2.733751301821486,
+          2.7838946797440753
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 3392377148468327412,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 255556111115837042940575151527492973627, \"state\": 152164281615150464030299503960818697469}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.024511801642997266
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 2.7343111891397833,
+      "result": {
+        "estimate": 2.7179152723506608,
+        "sample_std": 2.067167721771668,
+        "standard_error": 0.009244655093549645,
+        "confidence_interval": [
+          2.6997957483673036,
+          2.736034796334018
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 130436956984353614,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 228852126873128767389017898768926639625, \"state\": 35119071662858355063344425225124477097}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.016395916789122555
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 5.70327432826661,
+      "result": {
+        "estimate": 5.711817072036444,
+        "sample_std": 7.827509762319332,
+        "standard_error": 0.024752759256132323,
+        "confidence_interval": [
+          5.663301663894425,
+          5.760332480178463
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 16742282685653457643,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 147323423608343562630800408460376841503, \"state\": 209838192949866922055964112111113214107}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.008542743769834438
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 5.70327432826661,
+      "result": {
+        "estimate": 5.743832612567113,
+        "sample_std": 3.818203702923264,
+        "standard_error": 0.01707552606335566,
+        "confidence_interval": [
+          5.710364581482936,
+          5.77730064365129
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 12431313635767950453,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 165150184342719142721732033576750653593, \"state\": 283689964845157336221805334131977220302}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.04055828430050301
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 4.932140142712884,
+      "result": {
+        "estimate": 4.95511693503129,
+        "sample_std": 7.261522944284676,
+        "standard_error": 0.022962951785511544,
+        "confidence_interval": [
+          4.910109549531687,
+          5.000124320530893
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 142725516417411315,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 187643706937135814194295320972471905733, \"state\": 17360713135208150140849355776924400420}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.022976792318406325
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 4.932140142712884,
+      "result": {
+        "estimate": 4.925216570777027,
+        "sample_std": 3.7808797190238526,
+        "standard_error": 0.01690860813297528,
+        "confidence_interval": [
+          4.892075698836396,
+          4.958357442717658
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 9957048127796297127,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 136566900945949983691303047644790842027, \"state\": 217294796551806551632804016149860161719}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.006923571935856465
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 10.73357450616955,
+      "result": {
+        "estimate": 10.743250657814418,
+        "sample_std": 13.929800383706622,
+        "standard_error": 0.044049896564000365,
+        "confidence_interval": [
+          10.656912860548976,
+          10.82958845507986
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 5582748458709120319,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 248141215944644138862860984148914146173, \"state\": 123279364128142404124297173737604661144}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.009676151644868014
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 100,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 10.73357450616955,
+      "result": {
+        "estimate": 10.755417045367103,
+        "sample_std": 6.217171341915482,
+        "standard_error": 0.02780403549657321,
+        "confidence_interval": [
+          10.70092113579382,
+          10.809912954940387
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 11674189782936300328,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 112387633674518118251586341236785469045, \"state\": 259952013183194427679746147027502876464}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.021842539197553634
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 9.862960140429347,
+      "result": {
+        "estimate": 9.864031847746954,
+        "sample_std": 6.688146032869219,
+        "standard_error": 0.0211497747876861,
+        "confidence_interval": [
+          9.82257828916309,
+          9.905485406330818
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 6439843768733604096,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 275252349699409712603848589128248202387, \"state\": 67493515238018537810100498201932998021}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.0010717073176067515
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 9.862960140429347,
+      "result": {
+        "estimate": 9.862522985160611,
+        "sample_std": 0.8110773566614944,
+        "standard_error": 0.003627248209011887,
+        "confidence_interval": [
+          9.855413578670948,
+          9.869632391650274
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 12582321164629814961,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 1663957717472120745133579199374867437, \"state\": 111326588942743213685064302227888650949}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.00043715526873633337
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 12.055268335590256,
+      "result": {
+        "estimate": 12.020223652695389,
+        "sample_std": 10.985192682170739,
+        "standard_error": 0.034738229411473684,
+        "confidence_interval": [
+          11.9521367230489,
+          12.088310582341878
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 8540977462556708526,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 22139685128677755992782918010534134461, \"state\": 285408814676438667508069768588574331496}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.03504468289486695
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 0.25,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 12.055268335590256,
+      "result": {
+        "estimate": 12.056359606703644,
+        "sample_std": 2.6506171887217884,
+        "standard_error": 0.011853920432622615,
+        "confidence_interval": [
+          12.033125922655705,
+          12.079593290751584
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 6867341304548597236,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 271970464641472129669366713626115849133, \"state\": 335636111052444170872518023917191632030}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.001091271113388359
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 10.779981013610321,
+      "result": {
+        "estimate": 10.775946786766902,
+        "sample_std": 10.442762937256818,
+        "standard_error": 0.03302291594692156,
+        "confidence_interval": [
+          10.711221871510935,
+          10.840671702022869
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 3282369554503674751,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 237098372522762730487748735183118240339, \"state\": 100450671363390686449663971483608177690}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.004034226843419475
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.15,
+        "time": 0.0
+      },
+      "analytical_price": 10.779981013610321,
+      "result": {
+        "estimate": 10.79950195350722,
+        "sample_std": 2.8941002256867785,
+        "standard_error": 0.01294280967666624,
+        "confidence_interval": [
+          10.774134046540953,
+          10.824869860473486
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 9748969477646315458,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 285177934011362888580385917937970073561, \"state\": 280405835909145056680704444838476620214}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.01952093989689807
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 16.519981438398794,
+      "result": {
+        "estimate": 16.565841774068954,
+        "sample_std": 17.273297955585324,
+        "standard_error": 0.054622964242379606,
+        "confidence_interval": [
+          16.45878076415389,
+          16.672902783984018
+        ],
+        "n_paths": 100000,
+        "n_observations": 100000,
+        "method": "standard",
+        "seed": 12639413832182689153,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 235710953275921670501921623244408911015, \"state\": 6709637197318067179009168325043819112}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.04586033567015946
+    },
+    {
+      "option": {
+        "option_type": "put",
+        "strike": 110,
+        "maturity": 1,
+        "multiplier": 1.0
+      },
+      "market": {
+        "spot": 100,
+        "rate": 0.03,
+        "dividend_yield": 0.01,
+        "volatility": 0.3,
+        "time": 0.0
+      },
+      "analytical_price": 16.519981438398794,
+      "result": {
+        "estimate": 16.513210669852533,
+        "sample_std": 5.293671854444085,
+        "standard_error": 0.023674020234228692,
+        "confidence_interval": [
+          16.466809590193446,
+          16.55961174951162
+        ],
+        "n_paths": 100000,
+        "n_observations": 50000,
+        "method": "antithetic",
+        "seed": 15861027465307333011,
+        "bit_generator": "PCG64",
+        "rng_state": "{\"bit_generator\": \"PCG64\", \"has_uint32\": 0, \"state\": {\"inc\": 132195269441332155194754746235857823881, \"state\": 193783414936973217629230037787263831741}, \"uinteger\": 0}"
+      },
+      "absolute_error": 0.006770768546260797
+    }
+  ]
+}
