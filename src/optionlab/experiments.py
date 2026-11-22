@@ -7,7 +7,6 @@ import argparse
 import json
 import platform
 import resource
-import subprocess
 import sys
 from dataclasses import asdict
 from itertools import product
@@ -20,15 +19,17 @@ import scipy
 from .instruments import EuropeanOption, OptionType
 from .market import MarketSnapshot
 from .pricing import price
+from .provenance import source_revision
 from .simulation import MonteCarloConfig, mc_price
 
 
-def run_study(repeats: int = 100, full_grid: bool = False) -> dict:
+def run_study(
+    repeats: int = 100, full_grid: bool = False, *, root_seed: int = 20261122
+) -> dict:
     """Compare equal path budgets with independently spawned PCG64 streams."""
     if repeats < 2:
         raise ValueError("at least two seed repetitions are required")
     started = perf_counter()
-    root_seed = 20261122
     batch_size = 4096
     market = MarketSnapshot(100, 0.03, 0.01, 0.2)
     example = []
@@ -129,17 +130,9 @@ def run_study(repeats: int = 100, full_grid: bool = False) -> dict:
                     "absolute_error": abs(value.estimate - price(option, observation)),
                 }
             )
-    # Git is optional when the installed wheel is run outside a checkout.
-    revision = subprocess.run(
-        ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False
-    )
-    status = subprocess.run(
-        ["git", "status", "--porcelain"], capture_output=True, text=True, check=False
-    )
     return {
         "metadata": {
-            "source_commit": revision.stdout.strip() or None,
-            "working_tree_dirty": bool(status.stdout.strip()),
+            "source_commit": source_revision(),
             "python": platform.python_version(),
             "numpy": np.__version__,
             "scipy": scipy.__version__,
