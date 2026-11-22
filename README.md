@@ -91,9 +91,13 @@ established.
 ```python
 from optionlab import MonteCarloConfig, mc_price
 
-result = mc_price(option, market, MonteCarloConfig(
-    n_paths=100_000, method="antithetic", seed=20261122, batch_size=4096
-))
+result = mc_price(
+    option,
+    market,
+    MonteCarloConfig(
+        n_paths=100_000, method="antithetic", seed=20261122, batch_size=4096
+    ),
+)
 print(result)
 ```
 
@@ -127,3 +131,6 @@ uninformative. Normal intervals have approximate repeated-sampling coverage and
 can miss the analytical price. The study reports measured coverage with its
 sampling SE and empirical log-RMSE slope across path budgets. Tiny values may
 underflow, and nonrepresentable simulation values or moments raise ValueError.
+
+Measured convergence and resource observations are in
+[the Monte Carlo validation report](docs/MC_VALIDATION_REPORT.md).
