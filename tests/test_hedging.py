@@ -94,6 +94,7 @@ def test_dividend_grid_convergence_with_coupled_paths():
     grids = []
     holdings = []
     results = []
+    dividends = []
     for factor in (1, 2, 4):
         group = 4 // factor
         z = fine_z.reshape(252 * factor, group, 256).sum(axis=1) / np.sqrt(group)
@@ -107,6 +108,7 @@ def test_dividend_grid_convergence_with_coupled_paths():
             substeps_per_day=factor,
         )
         results.append(result.pnl)
+        dividends.append(result.dividends)
         holdings.append(result.trades)
     assert np.allclose(grids[0], grids[1], atol=1e-11)
     assert np.allclose(grids[1], grids[2], atol=1e-11)
@@ -115,6 +117,9 @@ def test_dividend_grid_convergence_with_coupled_paths():
     rms_coarse = np.sqrt(np.mean((results[0] - results[1]) ** 2))
     rms_fine = np.sqrt(np.mean((results[1] - results[2]) ** 2))
     assert rms_fine < rms_coarse
+    dividend_coarse = np.sqrt(np.mean((dividends[0] - dividends[1]) ** 2))
+    dividend_fine = np.sqrt(np.mean((dividends[1] - dividends[2]) ** 2))
+    assert dividend_fine < dividend_coarse
 
 
 def test_deterministic_dividend_integration():

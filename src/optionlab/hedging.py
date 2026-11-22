@@ -21,6 +21,7 @@ class HedgeResult:
     costs: NDArray[np.float64]
     trades: NDArray[np.int64]
     cost_impact: NDArray[np.float64]
+    dividends: NDArray[np.float64]
     ledger: list[dict]
 
 
@@ -96,6 +97,7 @@ def simulate_hedge(
     costs = np.zeros(count)
     trade_count = np.zeros(count, dtype=np.int64)
     impact = np.zeros(count)
+    dividends = np.zeros(count)
     rows = []
     frequency = rebalance_every * substeps_per_day
 
@@ -107,6 +109,7 @@ def simulate_hedge(
             interest = cash * (exp(market.rate * dt) - 1)
             dividend = shares * market.dividend_yield * spots[i - 1] * dt
             cash += interest + dividend
+            dividends += dividend
             impact *= exp(market.rate * dt)
         tau = (n_steps - i) * dt
         if i == n_steps:
@@ -173,4 +176,4 @@ def simulate_hedge(
             cash -= liability
             if audit_path is not None:
                 rows[-1]["cash_after_settlement"] = float(cash[audit_path])
-    return HedgeResult(cash, turnover, costs, trade_count, impact, rows)
+    return HedgeResult(cash, turnover, costs, trade_count, impact, dividends, rows)
