@@ -134,3 +134,14 @@ underflow, and nonrepresentable simulation values or moments raise ValueError.
 
 Measured convergence and resource observations are in
 [the Monte Carlo validation report](docs/MC_VALIDATION_REPORT.md).
+
+## Discrete delta hedging (Phase 3)
+
+`optionlab.hedging.physical_paths` generates physical-measure GBM paths.
+`simulate_hedge` runs a short-call self-financing stock hedge with cash financing,
+proportional trading costs, dividend accrual and settlement. Daily and weekly
+strategies can consume the same input paths. An optional path-level ledger records
+trades and cash flows. Run `python examples/hedging_research.py` to reproduce
+the research and terminal arrays. See the
+[hedging validation report](docs/HEDGING_VALIDATION_REPORT.md) for results,
+model assumptions and limitations.
