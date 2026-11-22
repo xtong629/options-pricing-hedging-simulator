@@ -1,151 +1,51 @@
-# Options Pricing, Risk & Hedging Analytics Platform
+# Options Pricing, Risk & Hedging Analytics
 
-A reproducible European equity option research project. The analytical foundation provides scalar
-Black-Scholes-Merton call/put prices, analytical Delta, Gamma, Vega, Theta and Rho,
-and independent deterministic numerical validation. Phase 2 adds batched
-risk-neutral Monte Carlo valuation and antithetic variance reduction.
+A fictional equity derivatives desk sells one cash-settled European call. How much risk does it retain when it adjusts the stock hedge daily or weekly, and what does the extra trading cost? This Python research package follows the trade from its initial premium through financing, discrete rebalancing and settlement to terminal loss and P&L explain.
 
-## Installation
+**At matched 20% volatility and 5 bps trading cost**, daily rebalancing reduced 95% expected shortfall from 254.44 to 142.23 currency units per contract in 10,000 paired simulated paths. Mean net P&L fell by 12.48. At 30% path volatility and 10 bps, daily hedging still reduced ES, while its net RMSE exceeded weekly RMSE by 21.10. The preferred frequency depends on the desk's risk measure and fee assumptions.
 
-Python 3.11+ is required.
+![Terminal hedge P&L distribution](docs/figures/distribution.png)
+
+## Install and run
+
+From a clone, use Python 3.11 or 3.12 on Linux or macOS.
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
-ruff check .
-ruff format --check .
-pytest -v
-python examples/analytical_pricing.py
+python -m pip install '.[dev,plots]'
+optionlab --help
+optionlab price --output pricing
+optionlab all --mode fast --output smoke
+optionlab all --mode full --output research
+python examples/research_figures.py research figures
+pytest -q
 ```
 
-The package uses NumPy and SciPy. The development extra adds pytest and Ruff.
+The distribution is `optionlab-analytics`, the import is `optionlab`, and the installed command is `optionlab`. Each CLI invocation writes a new directory and rejects existing destinations. Choose `price`, `mc`, `hedge`, `risk` or `all`. JSON configuration overrides the sampling defaults, for example `{"paths":512,"seed":123}` with `--config settings.json`. Outputs include parameters, seeds, software versions and research data. The optional plots extra supports figure generation from a checkout. Only full default runs reproduce the frozen research budgets.
 
-## Quick start
+| Setting | Fast | Full |
+|---|---:|---:|
+| P paths per volatility | 256 | 10,000 |
+| MC convergence repetitions | 2 | 100 |
+| Additional MC grid | none | 24 configurations, two methods |
+| Paired bootstrap repetitions | 20 | 1,000 |
 
-```python
-from optionlab import EuropeanOption, MarketSnapshot, OptionType, greeks, price
+## Methods and units
 
-option = EuropeanOption(OptionType.CALL, strike=100, maturity=1, multiplier=100)
-market = MarketSnapshot(spot=100, rate=0.03, dividend_yield=0.01, volatility=0.20)
-print(price(option, market))  # approximately 8.8273212254 per share
-print(greeks(option, market))
-```
+- **Pricing.** Immutable EuropeanOption and MarketSnapshot inputs feed price and greeks. Values describe a long option per share. Multiply by signed contracts and contract multiplier for desk exposure. Rates and dividends compound continuously. Vega and rho use unit absolute changes. Theta uses elapsed calendar years. Expiry and zero volatility have deterministic prices and missing Greeks. Integration and finite differences provide numerical validation.
+- **Monte Carlo.** Terminal GBM sampling under Q uses drift r−q. Antithetic paths produce independent pair means. Standard errors use the independent observation count. At 100,000 paths the ATM call empirical MSE ratio (antithetic/standard) was 0.510 across 100 repetitions. [MC validation](docs/MC_VALIDATION_REPORT.md)
+- **Hedging.** Physical paths use total-return drift μ and a separate path volatility. The short-call desk receives premium, holds fractional stock, accrues financing and dividend cash flows and pays proportional fees including entry and exit. Phase 3 compares the two schedules on shared paths. [Ledger and cost validation](docs/HEDGING_VALIDATION_REPORT.md)
+- **Risk.** Loss equals negative net P&L. Empirical VaR uses nearest rank, ES uses fractional tail weights. Bootstrap samples common path IDs. Left-end Greeks approximate option revaluation and preserve a visible residual alongside exact ledger reconciliation. [Risk validation](docs/RISK_VALIDATION_REPORT.md)
 
-The example prints both option types, contract values, all Greeks with units,
-put-call parity residual and computed integration/finite-difference errors.
+The numerical modules in src/optionlab are independent of CLI, file I/O and plotting. The studies orchestrate these APIs and record results. [Architecture](docs/SYSTEM_ARCHITECTURE.md) · [Validation plan](docs/VALIDATION_PLAN.md) · [Release audit](docs/RELEASE_AUDIT.md)
 
-## Mathematical conventions
+## Reading the research
 
-- Frozen models use a shared year clock. Remaining tenor is option maturity minus
-  market time, with 252 trading steps per year for future simulation.
-- Spot and strike are positive, tenor and volatility nonnegative, and all inputs
-  finite real scalars. Negative continuously compounded rates and dividend yields
-  are supported. Use OptionType.CALL or OptionType.PUT.
-- Values and sensitivities describe one long option per share. Multiply by the
-  positive contract multiplier and signed contract count for position exposure.
-  An empty short-call portfolio would buy positive delta shares to offset its
-  negative option delta.
-- Delta is shares per option share, Gamma is inverse currency, Vega is currency
-  per share per unit absolute volatility, Rho per unit rate, and Theta per calendar
-  year. Scale Vega by .01 for one volatility point, Rho by .0001 for one basis
-  point, and Theta by 1/252 for one trading day.
-- At expiry, price is intrinsic payoff. At zero volatility it is discounted
-  deterministic payoff. Boundary Greeks have None fields and an explicit
-  expiry or zero_volatility status, as specified by the design.
-- Pricing uses logarithmic tail probabilities, expm1 differences and put-call
-  parity. The core implements the formulas directly using SciPy probability
-  primitives.
+[MC convergence](docs/figures/convergence.png) · [Variance reduction](docs/figures/variance.png) · [Cost and error](docs/figures/cost.png) · [Tail losses](docs/figures/tail.png) · [P&L contributions](docs/figures/attribution.png)
 
-The full formulas and accounting design are in
-[the architecture](docs/SYSTEM_ARCHITECTURE.md).
+The models assume European exercise, synthetic GBM paths, continuous borrowing/lending at one rate and proportional trading costs. Stock dividends are discretized and checked for grid convergence. Rare payoffs and finite tail samples limit interval accuracy. Prices, portfolio losses and bootstrap intervals are conditional on model inputs. The studies exclude market impact, order-book execution and live trading.
 
-## Validation methodology
+## Quality and release
 
-Tests compare prices with direct discounted GBM payoff quadrature split at the
-strike, check parity, bounds, monotonicity, negative rates, deterministic limits,
-small maturities, tails and invalid inputs. All five Greeks are checked with
-central differences at three relative bump sizes. Tests use the absolute-plus-
-relative tolerance specified in [the validation plan](docs/VALIDATION_PLAN.md).
-
-The validation module is independent of the analytical formula for integration,
-and uses the public price function for differences. Quadrature truncates the
-standard normal domain at ±12 and targets moderate parameters. It serves as a
-numerical reference for the documented test grid.
-
-## Implemented scope and limitations
-
-Contract inputs are scalar; terminal sampling uses NumPy arrays. Extremely large discounted values or
-sensitivities outside floating-point range raise ValueError; tiny tail values
-can underflow. Boundary sensitivities use a conservative missing-value policy.
-The model assumes constant rates, yield and volatility, continuous frictionless
-pricing, and European exercise. Dynamic hedging and risk research
-are scheduled in [the roadmap](docs/MASTER_PLAN.md).
-
-Actual validation records are tracked in
-[the evidence ledger](docs/RESUME_EVIDENCE.md). No performance benchmark has been
-established.
-
-## Monte Carlo valuation (Phase 2)
-
-```python
-from optionlab import MonteCarloConfig, mc_price
-
-result = mc_price(
-    option,
-    market,
-    MonteCarloConfig(
-        n_paths=100_000, method="antithetic", seed=20261122, batch_size=4096
-    ),
-)
-print(result)
-```
-
-Run the comparison example with
-`python examples/monte_carlo_pricing.py`. Reproduce the multi-seed study with
-`python -m optionlab.experiments --repeats 100 --full-grid --output /tmp/mc-study.json`.
-The full study uses 100 independent seeds per method, option type and path budget,
-plus a 24-configuration analytical comparison with both sampling methods.
-
-Terminal GBM sampling uses Q drift r-q and discounts each payoff by exp(-rτ).
-Standard sampling uses N independent payoffs. Antithetic sampling uses Z and -Z,
-averages the two discounted payoffs, and estimates sample variance with ddof=1
-over N/2 independent pair means. Both methods report sample standard deviation,
-SE=s/sqrt(n), and the asymptotic 95% interval estimate ±1.96 SE.
-
-At least two independent observations are required. Antithetic path counts must
-be even. Batch size counts independent observations, with O(batch_size) working
-memory. Merged centered moments avoid retaining paths; changing batch size can
-change reduction rounding. Both methods use equal path budgets in the study,
-although antithetic sampling needs half as many normal draws.
-
-The default local Generator uses PCG64. A supplied NumPy Generator requires
-config.seed=None, advances in place, and its initial serialized bit-generator
-state is recorded in the result. Reproducibility requires the same NumPy version,
-bit generator, state/seed and settings. Global random state is untouched.
-Zero tenor/volatility returns the exact boundary price and zero uncertainty,
-consumes no random draws, and retains the requested budget in result metadata.
-
-Rare-payoff samples can contain only zeros, making an empirical interval
-uninformative. Normal intervals have approximate repeated-sampling coverage and
-can miss the analytical price. The study reports measured coverage with its
-sampling SE and empirical log-RMSE slope across path budgets. Tiny values may
-underflow, and nonrepresentable simulation values or moments raise ValueError.
-
-Measured convergence and resource observations are in
-[the Monte Carlo validation report](docs/MC_VALIDATION_REPORT.md).
-
-## Discrete delta hedging (Phase 3)
-
-`optionlab.hedging.physical_paths` generates physical-measure GBM paths.
-`simulate_hedge` runs a short-call self-financing stock hedge with cash financing,
-proportional trading costs, dividend accrual and settlement. Daily and weekly
-strategies can consume the same input paths. An optional path-level ledger records
-trades and cash flows. Run `python examples/hedging_research.py` to reproduce
-the research and terminal arrays. See the
-[hedging validation report](docs/HEDGING_VALIDATION_REPORT.md) for results,
-model assumptions and limitations.
-
-## Risk analytics
-
-Run `python examples/risk_research.py risk.json` to regenerate contract-level tail losses, paired daily-minus-weekly intervals, a ledger-based Greek explain and static shock revaluations. See the [validation report](docs/RISK_VALIDATION_REPORT.md).
+CI is configured to lint, check formatting, run the full tests, build sdist and wheel, and smoke-test a clean wheel installation on Python 3.11 and 3.12. Full research is an explicit local run. See the [candidate release notes and checklist](CHANGELOG.md) and [evidence ledger](docs/RESUME_EVIDENCE.md).

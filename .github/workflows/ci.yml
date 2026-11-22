@@ -1,19 +1,28 @@
-name: pricing-validation
+name: release-validation
 on: [push, pull_request]
 permissions:
   contents: read
 jobs:
   validate:
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python }}
           cache: pip
       - run: python -m pip install ".[dev]"
       - run: ruff check .
       - run: ruff format --check .
       - run: pytest -v
-      - run: python examples/analytical_pricing.py
-      - run: python examples/monte_carlo_pricing.py
+      - run: python -m build
+      - name: Test installed wheel outside checkout
+        run: |
+          python -m venv "$RUNNER_TEMP/clean"
+          "$RUNNER_TEMP/clean/bin/pip" install dist/*.whl
+          cd "$RUNNER_TEMP"
+          clean/bin/optionlab all --mode fast --output smoke
+          clean/bin/python -c 'import json; a=json.load(open("smoke/analytical.json"))["call"]; assert abs(a["price"]-a["integrated"]) < 1e-10'
